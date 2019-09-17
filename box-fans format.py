@@ -8,8 +8,8 @@ columns = ['Type', 'Size', 'Motor type', 'Motor Power', 'Qty',
 'Filter', 'Double Skin Panels']
 
 dict_type = {
-	'KPB': ['KPB', 'KP'],
-	'KVBF': ['KVBF', 'KVB-F', 'KVB/F']
+	'KPB': ['kpb', 'kp'],
+	'KVBF': ['kvb', 'kvbf', 'kvb-f', 'kvbf/f']
 }
 
 dict_size = {
@@ -25,51 +25,58 @@ dict_size = {
 }
 
 dict_speed = {
-	'One speed': ['1 speed', '1 Speed'],
-	'Two speeds': ['2 speeds', '2 Speeds']
+	'One speed': ['1 speed', '1speed'],
+	'Two speeds': ['2 speeds', '2speeds']
 }
 
 dict_motor = {
-	'0.25': ['0.25 KW', '0.25 kW', '0.25KW', '0.25kW', '0,25 KW', '0,25 kW', '0,25KW', '0,25kW'],
-	'0.37': ['0.37 KW', '0.37 kW', '0.37KW', '0.37kW', '0,37 KW', '0,37 kW', '0,37KW', '0,37kW'],
-	'0.55': ['0.55 KW', '0.55 kW', '0.55KW', '0.55kW', '0,55 KW', '0,55 kW', '0,55KW', '0,55kW'],
-	'0.75': ['0.75 KW', '0.75 kW', '0.75KW', '0.75kW', '0,75 KW', '0,75 kW', '0,75KW', '0,75kW'],
-	'1.1': ['1.1 KW', '1.1 kW', '1.1KW', '1.1kW', '1,1 KW', '1,1 kW', '1,1KW', '1,1kW'],
-	'1.5': ['1.5 KW', '1.5 kW', '1.5KW', '1.5kW', '1,5 KW', '1,5 kW', '1,5KW', '1,5kW'],
-	'2.2': ['2.2 KW', '2.2 kW', '2.2KW', '2.2kW', '2,2 KW', '2,2 kW', '2,2KW', '2,2kW'],
-	'3': ['3 KW', '3 kW', '3KW', '3kW'],
-	'4': ['4 KW', '4 kW', '4KW', '4kW'],
-	'5.5': ['5.5 KW', '5.5 kW', '5.5KW', '5.5kW', '5,5 KW', '5,5 kW', '5,5KW', '5,5kW'],
-	'7.5': ['7.5 KW', '7.5 kW', '7.5KW', '7.5kW', '7,5 KW', '7,5 kW', '7,5KW', '7,5kW'],
-	'11': ['11 KW', '11 kW', '11KW', '11kW'],
-	'15': ['15 KW', '15 kW', '15KW', '15kW'],
-	'18.5': ['18.5 KW', '18.5 kW', '18.5KW', '18.5kW', '18,5 KW', '18,5 kW', '18,5KW', '18,5kW'],
-	'22': ['22 KW', '22 kW', '22KW', '22kW'],
+	'0.25': ['0.25 kw', '0.25kw', '0,25 kw', '0,25kw'],
+	'0.37': ['0.37 kw', '0.37kw', '0,37 kw', '0,37kw'],
+	'0.55': ['0.55 kw', '0.55kw', '0,55 kw', '0,55kw'],
+	'0.75': ['0.75 kw', '0.75kw', '0,75 kw', '0,75kw'],
+	'1.1': ['1.1 kw', '1.1kw', '1,1 kw', '1,1kw'],
+	'1.5': ['1.5 kw', '1.5kw', '1,5 kw', '1,5kw'],
+	'2.2': ['2.2 kw', '2.2kw', '2,2 kw', '2,2kw'],
+	'3': ['3 kw', '3kw'],
+	'4': ['4 kw', '4kw'],
+	'5.5': ['5.5 kw', '5.5kw', '5,5 kw', '5,5kw'],
+	'7.5': ['7.5 kw', '7.5kw', '7,5 kw', '7,5kw'],
+	'11': ['11 kw', '11kw'],
+	'15': ['15 kw', '15kw'],
+	'18.5': ['18.5 kw', '18.5kw', '18,5 kw', '18,5kw'],
+	'22': ['22 kw', '22kw']
 }
 
 dict_power_switch = {
-	'1': ['Interr', 'interr']
+	'1': ['interr']
 }
 
 dict_filter = {
-	'1': ['Filt', 'filt']
+	'1': ['filt']
 }
 
-row_01 = 'KPB 25/25-11 KW-517 rpm-1 Speed + Filtre 25/25 + Interrup. KPB 1V >7,5<=11Kw'
+new_val = []
+row_01 = 'KPB 25/25-11 kw-517 rpm-1 Speed + Filtre 25/25 + Interrup. KPB 1V >7,5<=11kw'
 dicts = [dict_type, dict_size, dict_speed, dict_motor, dict_power_switch, dict_filter]
 
 for dict in dicts:
-	for main_field in dict:
-		list_main_field = dict[main_field]
-		value = '0'
-		for item in list_main_field:
-			if item in row_01:
+	# Reset the value to ensure the pass for each dictionary
+	x = 0
+	for key, value in dict.items():		
+		# Only use that dictionary if there is no value found
+		if x == 0:
+			for item in value:
 				print('\n')
-				print('Main field is', main_field)
-				break
+				print('Checking', item, 'at', key)
+				if item in row_01.lower():
+					# Add the key found to the list
+					print('Item found!', key)
+					new_val.append(key)
+					# Once found the value, stop the loop
+					x = 1
+					break
+		# If the value if found, stop looping in that dictionary
+		else:
+			break
 
-
-#print(keys['Type'])
-
-#for row in df.Model:
-	#print(row)
+print(new_val)
