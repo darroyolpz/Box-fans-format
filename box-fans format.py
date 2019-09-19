@@ -17,15 +17,15 @@ dict_type = {
 }
 
 dict_size = {
-	'9': ['09/09', '9/9', '09-09', '09/09'],
-	'10': ['10/10', '10-10'],
-	'12': ['12/12', '12-12'],
-	'15': ['15/15', '15-15'],
-	'18': ['18/18', '18-18'],
-	'20': ['20/20', '20-20'],
-	'22': ['22/22', '22-22'],
-	'25': ['25/25', '25-25'],
-	'30': ['30/28', '30-28']
+	9: ['09/09', '9/9', '09-09', '09/09'],
+	10: ['10/10', '10-10'],
+	12: ['12/12', '12-12'],
+	15: ['15/15', '15-15'],
+	18: ['18/18', '18-18'],
+	20: ['20/20', '20-20'],
+	22: ['22/22', '22-22'],
+	25: ['25/25', '25-25'],
+	30: ['30/28', '30-28']
 }
 
 dict_speed = {
@@ -34,21 +34,21 @@ dict_speed = {
 }
 
 dict_motor = {
-	'0,25': ['0.25 kw', '0.25kw', '0,25 kw', '0,25kw'],
-	'0,37': ['0.37 kw', '0.37kw', '0,37 kw', '0,37kw'],
-	'0,55': ['0.55 kw', '0.55kw', '0,55 kw', '0,55kw'],
-	'0,75': ['0.75 kw', '0.75kw', '0,75 kw', '0,75kw'],
-	'1,1': ['1.1 kw', '1.1kw', '1,1 kw', '1,1kw'],
-	'1,5': ['1.5 kw', '1.5kw', '1,5 kw', '1,5kw'],
-	'2,2': ['2.2 kw', '2.2kw', '2,2 kw', '2,2kw'],
-	'3': ['3 kw', '3kw'],
-	'4': ['4 kw', '4kw'],
-	'5,5': ['5.5 kw', '5.5kw', '5,5 kw', '5,5kw'],
-	'7,5': ['7.5 kw', '7.5kw', '7,5 kw', '7,5kw'],
-	'11': ['11 kw', '11kw'],
-	'15': ['15 kw', '15kw'],
-	'18,5': ['18.5 kw', '18.5kw', '18,5 kw', '18,5kw'],
-	'22': ['22 kw', '22kw']
+	0.25: ['0.25 kw', '0.25kw', '0,25 kw', '0,25kw'],
+	0.37: ['0.37 kw', '0.37kw', '0,37 kw', '0,37kw'],
+	0.55: ['0.55 kw', '0.55kw', '0,55 kw', '0,55kw'],
+	0.75: ['0.75 kw', '0.75kw', '0,75 kw', '0,75kw'],
+	1.1: ['1.1 kw', '1.1kw', '1,1 kw', '1,1kw'],
+	1.5: ['1.5 kw', '1.5kw', '1,5 kw', '1,5kw'],
+	2.2: ['2.2 kw', '2.2kw', '2,2 kw', '2,2kw'],
+	3: ['3 kw', '3kw'],
+	4: ['4 kw', '4kw'],
+	5.5: ['5.5 kw', '5.5kw', '5,5 kw', '5,5kw'],
+	7.5: ['7.5 kw', '7.5kw', '7,5 kw', '7,5kw'],
+	11: ['11 kw', '11kw'],
+	15: ['15 kw', '15kw'],
+	18.5: ['18.5 kw', '18.5kw', '18,5 kw', '18,5kw'],
+	22: ['22 kw', '22kw']
 }
 
 dict_inlet = {
@@ -60,31 +60,31 @@ dict_inlet = {
 
 
 dict_power_switch = {
-	'1': ['interr', 'mount.int', 'mount. int']
+	1: ['interr', 'mount.int', 'mount. int']
 }
 
 dict_pressure = {
-	'1': ['press', 'préss', 'diff']
+	1: ['press', 'préss', 'diff']
 }
 
 dict_roof = {
-	'1': ['toit', 'roof']
+	1: ['toit', 'roof']
 }
 
 dict_outlet_rain = {
-	'1': ['outlet rain', 'out.rain', 'out. rain', 'visie']
+	1: ['outlet rain', 'out.rain', 'out. rain', 'visie']
 }
 
 dict_vfd = {
-	'1': ['freq', 'conv']
+	1: ['freq', 'conv']
 }
 
 dict_filter = {
-	'1': ['filt']
+	1: ['filt']
 }
 
 dict_double_skin = {
-	'1': ['doubl', 'skin']
+	1: ['doubl', 'skin']
 }
 
 # Create a list with all the dictionaries to loop
@@ -124,6 +124,11 @@ for item in new_list:
 
 # Create dataframe
 result = pd.DataFrame(new_list, columns = col)
+
+# Add Qty and reorder the columns
+result['Qty'] = df['Qty']
+col.insert(5, 'Qty')
+result = result[col]
 
 # Export to Excel
 name = 'Box-fans result.xlsx'
