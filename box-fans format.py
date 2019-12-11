@@ -2,7 +2,7 @@ import pandas as pd
 from pandas import ExcelWriter
 
 # Open the quotation file
-excel_file = 'Box-fans.xlsx'
+excel_file = 'Excel file.xlsx'
 df = pd.read_excel(excel_file)
 
 # Create layout columns
