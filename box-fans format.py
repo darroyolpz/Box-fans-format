@@ -88,8 +88,9 @@ dict_double_skin = {
 }
 
 # Create a list with all the dictionaries to loop
-dicts = [dict_type, dict_size, dict_speed, dict_motor, dict_inlet,
-dict_power_switch, dict_pressure, dict_roof, dict_outlet_rain, dict_vfd, dict_filter, dict_double_skin]
+dicts = [dict_type, dict_speed, dict_motor, dict_inlet, dict_power_switch,
+dict_pressure, dict_roof, dict_outlet_rain, dict_vfd, dict_filter, dict_double_skin]
+
 new_val, new_list = [], []
 
 # Function to get the translation from quotation to template
@@ -97,6 +98,7 @@ for row in df['Model']:
 	for dict in dicts:
 		# Reset the value to ensure the pass for each dictionary
 		x = ''
+		# Use void in order to store some value in those fields where there is no component
 		new_val.append(x)
 		for key, value in sorted(dict.items()):		
 			# Only use that dictionary if there is no value found
@@ -109,16 +111,25 @@ for row in df['Model']:
 						# Once found the value, stop the loop
 						x = 1
 						break
-			# If the value if found, stop looping in that dictionary
+			# If the value is found, stop looping in that dictionary
 			else:
 				break
+	
+	# Check size of the box-fan in order to not have wrong data
+	for key, value in dict_size.items():
+		for item in value:
+			if item in row[:15].lower():
+				new_val.insert(1, key)
+				break
+			else:
+				break
+
 	new_list.append(new_val)
 	new_val = []
 
 # Check the standard configuration of the KPB
 for item in new_list:
-	type = item[0]
-	inlet = item [4]
+	type, inlet = item[0], item[4]
 	if (type == 'KPB') & (inlet == ''):
 		item[4] = 'Inlet spigot'
 
