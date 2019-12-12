@@ -17,7 +17,7 @@ dict_type = {
 }
 
 dict_size = {
-	9: ['09/09', '9/9', '09-09', '09/09'],
+	9: ['09/09', '9/9', '09-09', '09/09', '9-9'],
 	10: ['10/10', '10-10'],
 	12: ['12/12', '12-12'],
 	15: ['15/15', '15-15'],
@@ -60,7 +60,7 @@ dict_inlet = {
 
 
 dict_power_switch = {
-	1: ['interr', 'mount.int', 'mount. int']
+	1: ['interr', 'mount.int', 'mount. int', 'int']
 }
 
 dict_pressure = {
@@ -120,8 +120,6 @@ for row in df['Model']:
 		for item in value:
 			if item in row[:15].lower():
 				new_val.insert(1, key)
-				break
-			else:
 				break
 
 	new_list.append(new_val)
